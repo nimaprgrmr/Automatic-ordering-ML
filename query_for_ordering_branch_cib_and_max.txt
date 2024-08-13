@@ -1,0 +1,13 @@
+select HDR.IdIvcHdr, HDR.IdPrsClient, HDR.DscClient, dtl.ConfirmedAmount,
+GDS.DscGds, GDS.IdGds, HDR.Dt_Define, Label.Name, label.IdLabel, CPIV.Value Minn
+from SlsIvcHdr HDR inner join SlsIvcDtl DTL on HDR.IdIvcHdr=DTL.IdIvcHdr inner join GdsSpc GDS on DTL.IdGds = GDS.IdGds
+Inner join LabelToItem LTI on GDS.IdGds = LTI.IdItem
+Inner join Label on LTI.IdLabel = Label.IdLabel
+inner join ClassPropItemValue CPIV on GDS.IdGds = CPIV.IdItem 
+where
+HDR.DscClient LIKE N'%سیب%'
+or HDR.DscClient Like N'%راسبر جلال%'
+or HDR.DscClient = N'راسبر یوسف آباد'
+or HDR.DscClient like N'%امام حسین%'
+or HDR.DscClient like N'%شیراز جنوبی%'
+ORDER BY HDR.Dt_Define
